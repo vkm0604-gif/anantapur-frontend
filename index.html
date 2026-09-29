@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Anantapur Xpress Bharat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: sans-serif; padding: 15px; background: #f5f5f5; }
+        .product { background: white; padding: 15px; margin: 10px 0; border-radius: 10px; box-shadow: 0 2px 5px #ccc; }
+        button { background: #25D366; color: white; border: none; padding: 10px 15px; border-radius: 5px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Anantapur Xpress Bharat</h1>
+    <div id="products">Loading products...</div>
+
+<script>
+    const BACKEND_URL = "https://anantapur-backend.vercel.app";
+
+    async function loadProducts() {
+        try {
+            const res = await fetch(`${BACKEND_URL}/api/products`);
+            const data = await res.json();
+            const div = document.getElementById('products');
+            div.innerHTML = "";
+            
+            data.forEach(p => {
+                div.innerHTML += `
+                    <div class="product">
+                        <h3>${p.name}</h3>
+                        <p>Price: ₹${p.price}</p>
+                        <button onclick="orderOnWhatsApp('${p.name}')">WhatsApp pe Order Karo</button>
+                    </div>
+                `;
+            });
+        } catch (e) {
+            document.getElementById('products').innerHTML = "Backend connect nahi ho raha. Thodi der me try karo.";
+        }
+    }
+
+    function orderOnWhatsApp(productName) {
+        const msg = `Hello, mujhe ${productName} order karna hai - Anantapur Xpress Bharat se`;
+        window.open(`https://wa.me/91YOURNUMBER?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    loadProducts();
+</script>
+</body>
+</html>
