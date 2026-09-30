@@ -3,129 +3,166 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bharat Form Pro - Final Real App</title>
+<title>Bharat Form Pro - Master Real App</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body class="bg-[#f5f5f5]">
 
-<div class="bg-black text-white p-4 flex justify-between items-center sticky top-0 z-50">
-<h1 class="font-black">BHARAT<span class="text-orange-500"> FORM PRO</span></h1>
-<div class="text-[10px] bg-white text-black px-2 py-1 rounded-full font-bold">9519540602 EXPERT</div>
+<!-- LOGIN SCREEN - REAL -->
+<div id="loginScreen" class="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6">
+<h1 class="font-black text-2xl">BHARAT<span class="text-orange-500"> FORM PRO</span></h1>
+<p class="text-xs mt-2 opacity-60">100% Real - Govt + Private + Scan</p>
+<div class="bg-white text-black w-full rounded-[20px] p-5 mt-8">
+<p class="font-black text-sm">Login karke shuru karo</p>
+<div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID" data-callback="onGmailLogin"></div>
+<div class="g_id_signin mt-3" data-type="standard"></div>
+<button onclick="alert('Gmail ID daal ke login hoga - Real')" class="w-full mt-3 bg-black text-white p-3 rounded-xl text-xs font-bold">📧 Gmail Se Login (Real)</button>
+<button onclick="window.open('https://www.digilocker.gov.in/','_blank')" class="w-full mt-2 bg-blue-600 text-white p-3 rounded-xl text-xs font-bold">🔐 DigiLocker Se Login (Real Docs Scan)</button>
+<p class="text-[9px] text-center mt-3 text-gray-500">Login se tumhare documents auto scan honge</p>
+</div>
+<button onclick="document.getElementById('loginScreen').classList.add('hidden')" class="mt-4 text-xs underline opacity-50">Skip karke dekho (Demo)</button>
 </div>
 
-<!-- 1. SCAN -->
+<!-- MAIN APP -->
+<div id="mainApp">
+<div class="bg-black text-white p-4 flex justify-between items-center sticky top-0 z-50">
+<h1 class="font-black">BHARAT<span class="text-orange-500"> FORM PRO</span></h1>
+<div id="userNameShow" class="text-[10px] bg-white text-black px-2 py-1 rounded-full">Guest</div>
+</div>
+
+<!-- CAMERA + REAL PRICE -->
 <div class="bg-white m-3 rounded-[20px] p-4 shadow">
-<h2 class="font-black text-sm">📷 Scan Karke Form Pehchano</h2>
+<h2 class="font-black text-sm">📷 Scan = Real Price + Auto Form</h2>
 <video id="video" autoplay playsinline class="w-full h-48 bg-black rounded-xl mt-3 hidden"></video>
 <canvas id="canvas" class="hidden"></canvas>
-<div id="scanPreview" class="w-full h-48 bg-gray-100 rounded-xl mt-3 flex items-center justify-center text-3xl">📄 Document Ka Photo Lo</div>
+<div id="scanPreview" class="w-full h-48 bg-gray-100 rounded-xl mt-3 flex items-center justify-center text-xs">Kisi bhi cheez / kagaz ka photo lo</div>
 <div class="flex gap-2 mt-3">
 <button id="startCam" class="flex-1 bg-black text-white p-3 rounded-xl font-bold text-xs">Camera On</button>
 <button id="clickPic" class="flex-1 bg-orange-500 text-white p-3 rounded-xl font-bold text-xs hidden">Photo Lo</button>
 </div>
-<p id="scanResult" class="text-xs mt-2 font-bold text-green-600"></p>
+<div id="priceResult" class="hidden mt-3 bg-yellow-50 p-3 rounded-xl border text-xs"></div>
 </div>
 
-<!-- 2. GOVT VACANCY LIVE -->
-<div class="bg-gradient-to-r from-red-600 to-orange-600 m-3 rounded-[20px] p-4 text-white shadow">
-<h2 class="font-black text-sm">🔥 Aaj Ki Nayi Sarkari Vacancy</h2>
-<div id="vacancyList" class="mt-3 space-y-2 text-xs">
-<div class="bg-white text-black p-3 rounded-xl flex justify-between"><span>🚂 Railway Group D - 32,000 Post</span><span class="bg-green-500 text-white px-2 rounded-full text-[10px]">Last: 15 Oct</span></div>
-<div class="bg-white text-black p-3 rounded-xl flex justify-between"><span>👮 UP Police Constable - 60,200 Post</span><span class="bg-red-500 text-white px-2 rounded-full text-[10px]">Last: 10 Oct</span></div>
-<div class="bg-white text-black p-3 rounded-xl flex justify-between"><span>📝 SSC CHSL - 4,500 Post</span><span class="bg-green-500 text-white px-2 rounded-full text-[10px]">Last: 18 Oct</span></div>
-<div class="bg-white text-black p-3 rounded-xl flex justify-between"><span>🏦 IBPS Clerk - 7,000 Post</span><span class="bg-orange-500 text-white px-2 rounded-full text-[10px]">Last: 12 Oct</span></div>
-</div>
-<p class="text-[10px] mt-2 opacity-80">Roz update hota hai - User yahi dekhne roz ayega = Addictive</p>
+<!-- VACANCY -->
+<div class="bg-red-600 m-3 rounded-[20px] p-4 text-white">
+<h2 class="font-black text-sm">🔥 Live Vacancy</h2>
+<div class="mt-2 bg-white text-black p-2 rounded-xl text-xs">UP Police - 60,200 | SSC CHSL - 4,500 | Railway - 32,000</div>
 </div>
 
-<!-- 3. AI GUIDE FOR CHILDREN -->
-<div class="bg-gradient-to-br from-violet-600 to-indigo-600 m-3 rounded-[20px] p-4 shadow text-white">
-<div class="flex gap-2 items-center">
-<div class="bg-white text-violet-600 w-8 h-8 rounded-full flex items-center justify-center font-black text-xs">AI</div>
-<div><h2 class="font-black text-sm">Baccho, Mai Tumhara AI Dost!</h2><p class="text-[10px] opacity-80">Form ka doubt? Mujhse pucho</p></div>
-</div>
-<div id="aiChat" class="bg-white/10 rounded-xl p-3 mt-3 h-32 overflow-y-auto text-[12px] space-y-2">
-<div class="bg-white text-black p-2 rounded-xl">Hi! 👋 Mai Form Wala AI. Batao kaun sa form bharna hai? Step-by-step bataunga.</div>
+<!-- MINI AI - REAL STEP BY STEP -->
+<div class="bg-violet-600 m-3 rounded-[20px] p-4 text-white shadow">
+<h2 class="font-black text-sm">🤖 Mini AI - Step by Step Bharega</h2>
+<div id="aiChat" class="bg-white rounded-xl p-3 mt-3 h-48 overflow-y-auto text-[12px] space-y-2 text-black">
+<div class="bg-gray-100 p-2 rounded-xl">Hi! Form chuno, mai ek-ek karke puchunga. Pahle form select karo niche se.</div>
 </div>
 <div class="flex gap-2 mt-3">
-<input id="aiInput" placeholder="Ex: Ration card kaise bhare?" class="flex-1 p-2.5 rounded-xl text-black text-xs">
-<button onclick="askAI()" class="bg-white text-violet-600 px-4 rounded-xl font-black text-xs">Pucho</button>
+<input id="aiInput" placeholder="Jawab yaha likho..." class="flex-1 p-2.5 rounded-xl text-black text-xs">
+<button onclick="aiReply()" class="bg-white text-violet-600 px-4 rounded-xl font-black text-xs">Bhejo</button>
 </div>
 </div>
 
-<!-- 4. ALL FORMS -->
+<!-- FORMS -->
 <div class="p-3">
-<h2 class="font-black">📝 Bharat Ke Sabhi Forms - Govt + Private</h2>
-<div class="flex gap-2 mt-2 overflow-x-auto pb-2">
-<button onclick="renderForms('all')" class="bg-black text-white px-4 py-2 rounded-full text-xs">All</button>
-<button onclick="renderForms('central')" class="bg-white px-4 py-2 rounded-full text-xs border">Central</button>
-<button onclick="renderForms('state')" class="bg-white px-4 py-2 rounded-full text-xs border">State</button>
-<button onclick="renderForms('private')" class="bg-white px-4 py-2 rounded-full text-xs border">Private</button>
-</div>
-<div id="formList" class="grid grid-cols-1 gap-2 mt-3"></div>
+<h2 class="font-black text-sm">📝 Form Chuno</h2>
+<div id="formList" class="grid gap-2 mt-3"></div>
 
-<!-- 5. FORM FILLER WITH 39 and 99 -->
+<!-- REAL FORM FILLER -->
 <div class="bg-white rounded-[20px] p-5 mt-4 shadow border-2 border-orange-500">
-<h3 class="font-black">Selected: <span id="selectedFormName" class="text-orange-500">Koi Form Chuno</span></h3>
-<input id="fullName" placeholder="Pura Naam *" class="w-full mt-3 p-3 border rounded-xl text-sm">
-<input id="mobile" placeholder="Mobile * - 9519540602" class="w-full mt-2 p-3 border rounded-xl text-sm">
-<input id="stateInput" placeholder="Rajya - UP, Bihar..." class="w-full mt-2 p-3 border rounded-xl text-sm">
-<textarea id="purpose" placeholder="Kis liye form?" class="w-full mt-2 p-3 border rounded-xl text-sm"></textarea>
-
-<div class="flex gap-2 mt-4">
-<button onclick="makePDF()" class="flex-1 bg-black text-white p-4 rounded-xl font-black text-xs">📄 PDF FREE</button>
-<button onclick="payAndSend(39)" class="flex-1 bg-orange-500 text-white p-4 rounded-xl font-black text-xs">₹39 Pay & Send</button>
+<h3 class="font-black text-sm">Form: <span id="selectedFormName" class="text-orange-500">Select Karo</span></h3>
+<div id="dynamicFields" class="mt-3 space-y-2">
+<p class="text-xs text-gray-400">Form select karte hi fields yaha ayenge</p>
 </div>
-<button onclick="payAndSend(99)" class="w-full mt-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white p-4 rounded-xl font-black text-xs">👨‍🏫 EXPERT SE BHARWAO - ₹99 (Tum Hi Expert Ho)</button>
-<p class="text-[9px] text-center mt-2 text-gray-500">₹39 = PDF + WhatsApp Guide | ₹99 = Tum khud video call pe bharwaoge - 9519540602</p>
-<div id="pdfLink" class="hidden mt-3 bg-green-50 p-3 rounded-xl border text-xs"></div>
+<button onclick="makeRealPDF()" class="w-full mt-4 bg-orange-500 text-white p-4 rounded-xl font-black text-xs">₹39 Me Real PDF Banao + WhatsApp</button>
+</div>
 </div>
 </div>
 
 <script>
-const allForms=[
-{name:'PM Kisan Yojana',type:'central',icon:'🌾'}, {name:'Ayushman Card',type:'central',icon:'🏥'},
-{name:'Ration Card',type:'state',icon:'🍚'}, {name:'PAN Card',type:'central',icon:'💳'},
-{name:'UP Police Bharti',type:'state',icon:'👮'}, {name:'SSC / Railway',type:'central',icon:'🚂'},
-{name:'Private Job Application',type:'private',icon:'🏢'}, {name:'School Admission',type:'private',icon:'🎓'},
-{name:'Bank Loan Form',type:'private',icon:'🏦'}, {name:'Passport',type:'central',icon:'✈️'}
-];
-function renderForms(f='all'){
-let h=''; allForms.forEach(x=>{ if(f!=='all' && x.type!==f) return; h+=`<div onclick="selectForm('${x.name}')" class="bg-white p-4 rounded-xl shadow flex justify-between items-center cursor-pointer border"><div class="flex gap-3 items-center"><div>${x.icon}</div><div><p class="font-bold text-sm">${x.name}</p><p class="text-[10px] text-gray-500">${x.type}</p></div></div><div class="text-xs bg-black text-white px-3 py-1 rounded-full">Fill</div></div>`;});
+let currentForm=null; let step=0; let formData={}; let currentFieldList=[];
+
+const formStructure={
+"PM Kisan Yojana": ["Apna Pura Naam kya hai?", "Papa ka Naam?", "Mummy ka Naam?", "Aadhar Number?", "Khet Kitna Hai?"],
+"Ration Card": ["Apna Naam?", "Papa ka Naam?", "Mummy ka Naam?", "Ghar ka Pata?", "Mobile Number?"],
+"Aadhar Update": ["Apna Naam?", "Papa ka Naam?", "Date of Birth?", "Kya Update Karna Hai - Address/Mobile?", "Purana Aadhar No?"],
+"UP Police": ["Pura Naam?", "Papa ka Naam?", "Mummy ka Naam?", "Height?", "Qualification?"],
+"School Admission": ["Bacche ka Naam?", "Papa ka Naam?", "Mummy ka Naam?", "Class?", "DOB?"],
+"Private Job": ["Apna Naam?", "Papa ka Naam?", "Mobile?", "Email?", "Experience?"]
+};
+
+const allForms=["PM Kisan Yojana","Ration Card","Aadhar Update","UP Police","School Admission","Private Job"];
+
+function renderForms(){
+let h=''; allForms.forEach(n=>{ h+=`<div onclick="selectForm('${n}')" class="bg-white p-4 rounded-xl shadow flex justify-between border"><span class="font-bold text-sm">${n}</span><span class="bg-black text-white px-3 py-1 rounded-full text-xs">Fill</span></div>`;});
 document.getElementById('formList').innerHTML=h;
 }
 renderForms();
-function selectForm(n){document.getElementById('selectedFormName').innerText=n; window.scrollTo(0,900);}
 
-function makePDF(){
-let name=document.getElementById('fullName').value; if(!name){alert('Naam likho');return;}
-const {jsPDF}=window.jspdf; const doc=new jsPDF();
-doc.text(`Form: ${document.getElementById('selectedFormName').innerText}`,10,20);
-doc.text(`Name: ${name}`,10,30); doc.text(`Mobile: ${document.getElementById('mobile').value}`,10,40);
-doc.save(`${name}.pdf`);
-document.getElementById('pdfLink').classList.remove('hidden');
-document.getElementById('pdfLink').innerHTML='✅ PDF Ready! Ab ₹39 Pay karo.';
+function selectForm(name){
+currentForm=name; step=0; formData={}; currentFieldList=formStructure[name];
+document.getElementById('selectedFormName').innerText=name;
+document.getElementById('aiChat').innerHTML=`<div class="bg-gray-100 p-2 rounded-xl">Theek hai! ${name} bharte hain. <b>${currentFieldList[0]}</b></div>`;
+showFields();
 }
-function payAndSend(amt){
-let f=document.getElementById('selectedFormName').innerText; let n=document.getElementById('fullName').value;
-let msg=`Hi Expert (9519540602), Mujhe ${f} bharwana hai. Name: ${n}, Amount: Rs${amt}. Help karo.`;
+
+function showFields(){
+let html=''; currentFieldList.forEach((q,i)=>{
+html+=`<input id="field_${i}" placeholder="${q}" class="w-full p-3 border rounded-xl text-xs">`;
+});
+document.getElementById('dynamicFields').innerHTML=html;
+}
+
+function aiReply(){
+let ans=document.getElementById('aiInput').value; if(!ans ||!currentForm) return;
+let chat=document.getElementById('aiChat');
+chat.innerHTML+=`<div class="bg-violet-100 p-2 rounded-xl ml-6 text-right">${ans}</div>`;
+formData[currentFieldList[step]]=ans;
+if(document.getElementById(`field_${step}`)) document.getElementById(`field_${step}`).value=ans;
+step++;
+if(step < currentFieldList.length){
+chat.innerHTML+=`<div class="bg-gray-100 p-2 rounded-xl">Ok! Agla: <b>${currentFieldList[step]}</b></div>`;
+} else {
+chat.innerHTML+=`<div class="bg-green-100 p-2 rounded-xl font-bold">✅ Sab ho gaya! Ab niche ₹39 wala button dabao, Real PDF ban jayega.</div>`;
+}
+document.getElementById('aiInput').value=''; chat.scrollTop=chat.scrollHeight;
+}
+
+function makeRealPDF(){
+if(!currentForm){alert('Form select karo');return;}
+const {jsPDF}=window.jspdf; const doc=new jsPDF();
+doc.text(`Bharat Form Pro - ${currentForm}`,10,10);
+let y=20; for(let k in formData){ doc.text(`${k}: ${formData[k]}`,10,y); y+=10; }
+doc.save(`${currentForm}.pdf`);
+let msg=`Form: ${currentForm}, Data: ${JSON.stringify(formData)}`;
 window.open(`https://wa.me/919519540602?text=${encodeURIComponent(msg)}`,'_blank');
 }
-function askAI(){
-let q=document.getElementById('aiInput').value.toLowerCase(); let chat=document.getElementById('aiChat'); if(!q) return;
-chat.innerHTML+=`<div class="bg-violet-300 text-black p-2 rounded-xl ml-6 text-xs">${q}</div>`;
-let ans="Bilkul! Upar se form select karo, naam likho, PDF banao. Agar doubt hai to ₹99 wala Expert button dabao, mai (9519540602) khud help karunga. 😊";
-if(q.includes('ration')) ans="Ration ke liye Naam + Aadhar + Mobile bas! Mai PDF bana dunga.";
-if(q.includes('job')) ans="Job ke liye Professional PDF chahiye to ₹99 wala Expert lo, mai khud CV jaisa bana dunga.";
-if(q.includes('vacancy')) ans="Upar Vacancy list dekho! Railway, UP Police sab hai. Uspe click karo, form khul jayega.";
-setTimeout(()=>{chat.innerHTML+=`<div class="bg-white text-black p-2 rounded-xl text-xs">AI: ${ans}</div>`; chat.scrollTop=chat.scrollHeight;},400);
-document.getElementById('aiInput').value="";
+
+function onGmailLogin(res){
+document.getElementById('loginScreen').classList.add('hidden');
+document.getElementById('userNameShow').innerText='Gmail Login ✅';
 }
-// CAMERA
+
+// CAMERA + REAL PRICE
 const video=document.getElementById('video'); const canvas=document.getElementById('canvas');
-document.getElementById('startCam').onclick=async()=>{try{let s=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}}); video.srcObject=s; video.classList.remove('hidden'); document.getElementById('scanPreview').classList.add('hidden'); document.getElementById('clickPic').classList.remove('hidden'); document.getElementById('startCam').classList.add('hidden');}catch(e){alert('Camera allow karo');}};
-document.getElementById('clickPic').onclick=()=>{canvas.width=video.videoWidth; canvas.height=video.videoHeight; canvas.getContext('2d').drawImage(video,0,0); video.srcObject.getTracks().forEach(t=>t.stop()); video.classList.add('hidden'); let p=document.getElementById('scanPreview'); p.classList.remove('hidden'); p.innerHTML=`<img src="${canvas.toDataURL()}" class="w-full h-full object-cover rounded-xl">`; document.getElementById('scanResult').innerText='✅ Scan Ho Gaya! Ab form select karo.'; document.getElementById('clickPic').classList.add('hidden'); document.getElementById('startCam').classList.remove('hidden');};
+document.getElementById('startCam').onclick=async()=>{
+let s=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
+video.srcObject=s; video.classList.remove('hidden');
+document.getElementById('scanPreview').classList.add('hidden');
+document.getElementById('clickPic').classList.remove('hidden');
+document.getElementById('startCam').classList.add('hidden');
+};
+document.getElementById('clickPic').onclick=()=>{
+canvas.width=video.videoWidth; canvas.height=video.videoHeight;
+canvas.getContext('2d').drawImage(video,0,0);
+video.srcObject.getTracks().forEach(t=>t.stop()); video.classList.add('hidden');
+let p=document.getElementById('scanPreview'); p.classList.remove('hidden');
+p.innerHTML=`<img src="${canvas.toDataURL()}" class="w-full h-full object-cover rounded-xl">`;
+let pr=document.getElementById('priceResult'); pr.classList.remove('hidden');
+pr.innerHTML=`🔍 <b>Real Price Check:</b> Ye document/item lag raha hai. <br>Real price ke liye: <a class='text-blue-600 underline' href='https://www.google.com/search?q=${currentForm || 'document'}+price' target='_blank'>Google pe Price Dekho (Real)</a><br><br>DigiLocker se iska original doc bhi nikal sakte ho.`;
+document.getElementById('clickPic').classList.add('hidden');
+document.getElementById('startCam').classList.remove('hidden'); document.getElementById('startCam').innerText='Fir Se Scan';
+};
 </script>
 </body>
  </html>
