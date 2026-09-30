@@ -1,48 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Anantapur Xpress Bharat</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body { font-family: sans-serif; padding: 15px; background: #f5f5f5; }
-        .product { background: white; padding: 15px; margin: 10px 0; border-radius: 10px; box-shadow: 0 2px 5px #ccc; }
-        button { background: #25D366; color: white; border: none; padding: 10px 15px; border-radius: 5px; font-weight: bold; }
-    </style>
+<title>Anantapur Xpress Bharat</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:sans-serif;background:#fff8f0;padding:15px;margin:0}
+h1{color:#e63900;text-align:center}
+.top{background:#e63900;color:white;padding:15px;text-align:center;border-radius:12px}
+.product{background:white;padding:15px;margin:12px 0;border-radius:12px;box-shadow:0 2px 8px #ddd;border:1px solid #eee}
+button{background:#25D366;color:white;border:none;padding:12px;width:100%;border-radius:8px;font-size:17px;font-weight:bold}
+.price{color:green;font-weight:bold;font-size:18px}
+</style>
 </head>
 <body>
-    <h1>Anantapur Xpress Bharat</h1>
-    <div id="products">Loading products...</div>
+<div class="top">
+<h1>Anantapur Xpress Bharat</h1>
+<p>Anantapur ke best products</p>
+</div>
+
+<div class="product">
+<h3>Anantapur Silk Saree</h3>
+<p class="price">₹ 1200</p>
+<p>Original Anantapur handloom</p>
+<button onclick="order('Silk Saree - Rs 1200')">WhatsApp Order</button>
+</div>
+
+<div class="product">
+<h3>Palli Chikki - 1KG</h3>
+<p class="price">₹ 250</p>
+<p>Special groundnut sweet</p>
+<button onclick="order('Chikki 1KG - Rs 250')">WhatsApp Order</button>
+</div>
+
+<div class="product">
+<h3>Cotton Kurta</h3>
+<p class="price">₹ 850</p>
+<p>Pure cotton</p>
+<button onclick="order('Cotton Kurta - Rs 850')">WhatsApp Order</button>
+</div>
 
 <script>
-    const BACKEND_URL = "https://anantapur-backend.vercel.app";
-
-    async function loadProducts() {
-        try {
-            const res = await fetch(`${BACKEND_URL}/api/products`);
-            const data = await res.json();
-            const div = document.getElementById('products');
-            div.innerHTML = "";
-            
-            data.forEach(p => {
-                div.innerHTML += `
-                    <div class="product">
-                        <h3>${p.name}</h3>
-                        <p>Price: ₹${p.price}</p>
-                        <button onclick="orderOnWhatsApp('${p.name}')">WhatsApp pe Order Karo</button>
-                    </div>
-                `;
-            });
-        } catch (e) {
-            document.getElementById('products').innerHTML = "Backend connect nahi ho raha. Thodi der me try karo.";
-        }
-    }
-
-    function orderOnWhatsApp(productName) {
-        const msg = `Hello, mujhe ${productName} order karna hai - Anantapur Xpress Bharat se`;
-        window.open(`https://wa.me/919519540602?text=${encodeURIComponent(msg)}`, '_blank');
-    }
-
-    loadProducts();
+function order(name){
+ let num = "919519540602";
+ let msg = `Namaste, mujhe ${name} chahiye. Anantapur Xpress Bharat website se dekh raha hu.`;
+ window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`,'_blank');
+}
 </script>
 </body>
 </html>
